@@ -12,6 +12,8 @@ Oxygen is a general-purpose, multithreaded programming language designed so that
 ### Linux, macOS, Android (Termux / NDK), and iOS
 
 ```sh
+git clone https://github.com/fructose15/oxygen
+cd ./oxygen
 chmod +x configure
 ./configure
 make
@@ -25,6 +27,8 @@ sudo make install
 Windows builds use `config.h` directly (with MSVC `cl.exe` or MinGW `g++.exe`) without running `./configure`:
 
 ```bat
+git clone https://github.com/fructose15/oxygen
+cd oxygen
 cl /EHsc /O2 /Isrc /Fe:oxygen.exe src\runtime.c src\interpreter.cpp src\compiler.cpp src\ide_server.cpp src\main.cpp ws2_32.lib
 ```
 
