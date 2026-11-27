@@ -1,0 +1,23 @@
+use module threading
+
+print text "Launching parallel Oxygen worker pool..."
+create mutex console_guard
+create atomic counter completed_jobs with value 0
+
+define task process_batch with parameter batch_label
+    sleep for 45 milliseconds
+    lock mutex console_guard
+    print text "Worker finished batch: " plus batch_label
+    unlock mutex console_guard
+    increment atomic counter completed_jobs
+end task
+
+run task process_batch with "North Cluster" in background as t_north
+run task process_batch with "South Cluster" in background as t_south
+run task process_batch with "East Cluster" in background as t_east
+run task process_batch with "West Cluster" in background as t_west
+
+wait for all background tasks to finish
+
+read atomic counter completed_jobs into finished_total
+print text "All concurrent batches complete. Total: " plus finished_total

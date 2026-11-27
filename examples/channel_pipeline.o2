@@ -1,0 +1,30 @@
+use module threading
+use module channels
+
+create channel work_queue
+create atomic counter processed_items with value 0
+
+define task producer_task with parameter count_limit
+    repeat 3 times
+        set text payload to "Packet #" plus iteration
+        send text payload to channel work_queue
+        print text "Producer queued: " plus payload
+        sleep for 25 milliseconds
+    end repeat
+end task
+
+define task consumer_task with parameter worker_id
+    repeat 3 times
+        receive message from channel work_queue into item
+        increment atomic counter processed_items
+        print text "Consumer " plus worker_id plus " handled " plus item
+    end repeat
+end task
+
+run task producer_task with 3 in background as p1
+run task consumer_task with "A" in background as c1
+
+wait for all background tasks to finish
+
+read atomic counter processed_items into total
+print text "Pipeline completed. Messages processed: " plus total

@@ -1,0 +1,14 @@
+use module core
+
+print text "Welcome to Oxygen — English-syntax programming!"
+set text creator to "Fructose"
+set number workers to 4
+
+print text "Creator: " plus creator
+print text "Configured worker count: " plus workers
+
+if workers is greater than 2 then
+    print text "Multithreaded execution ready."
+otherwise
+    print text "Single-worker mode active."
+end if
