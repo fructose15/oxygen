@@ -69,3 +69,8 @@ Or compile it to a standalone native binary:
 oxygen --compile hello.o2 -o hello
 ./hello
 ```
+
+## Community
+
+- **Discord**: https://discord.gg/rfrtjVwSHD
+- **Facebook**: https://www.facebook.com/groups/2503013106897346
